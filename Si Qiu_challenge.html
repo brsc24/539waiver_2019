@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    canvas {
+        width: 80vw;
+        height: 80vh;
+        border: 1px solid black;
+    }
+    #picker{
+        position: relative;
+    }
+</style>
+</head>
+<body>
+
+    <canvas id="pad"></canvas>
+    <div id="picker">
+        <input id="colorpicker" type="color" />
+    </div>
+    <div id="clickpicker" onclick="pickColor();"></div>
+    <!--    <p id="demo"></p>-->
+    <!--    <p id="print"></p>-->
+
+<script>
+    //set up canvas
+    var canvas = document.getElementById("pad");
+    var mouse = {x: 0, y: 0};
+    var context = canvas.getContext('2d');
+    context.fillStyle = "red"; // default fillcolor: red
+    canvas.addEventListener("mousemove", function(event) {
+      myFunction(event);
+    });
+
+    function myFunction(e) { //initialize variables
+        var mousePos = getMousePos(canvas, e);
+        var posx = mousePos.x;
+        var posy = mousePos.y;
+        var h = mousePos.h;
+        var l = mousePos.l;
+        draw(canvas, posx, posy, h, l);
+//        var coor = "Coordinates: (" + posx + "," + posy + ")";
+//        document.getElementById("demo").innerHTML = coor;
+    }
+    function getMousePos(canvas, evt){ // get mouse position
+            var rect = canvas.getBoundingClientRect();
+            var c = rect.width/canvas.width;
+            var d = rect.height/canvas.height;
+            return{ // adjust all the parameters according to the canvas size
+                x: ((evt).clientX - rect.left)/c,
+                y: ((evt).clientY - rect.top)/d,
+                h: 30/c,
+                l: 30/d
+            }
+        }
+    function draw(canvas, posx, posy, h, l){
+        context.fillRect(posx-h/2, posy-l/2, h, l); //move the cursor to the center of the square
+    }
+    function pickColor() { //click colorpicker
+        $("#colorpicker").click();
+    }
+
+    document.body.onkeyup = function(e){ //press spacebar to clear the canvas
+    if(e.keyCode == 38){ //pen up
+        context.fillStyle = '#00000000';
+    }
+    if(e.keyCode == 40){//pen down
+        context.fillStyle = 'red';
+    }
+    if(e.keyCode == 32){
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        pickColor() == true; //auto pop-out colorpicker after clearing canvas
+    }
+    if(e.keyCode == 66){ //change fillcolor: blue
+        context.fillStyle = 'blue';
+    }
+    if(e.keyCode == 71){ //change fillcolor: green
+        context.fillStyle = 'green';
+    }
+    if(e.keyCode == 82){ //change fillcolor: red
+        context.fillStyle = 'red';
+    }
+    if(e.keyCode == 89){ //change fillcolor: yellow
+        context.fillStyle = 'yellow';
+    }
+    }
+
+    var changeColor = document.getElementById('colorpicker'); //when the colorpicker is clicked
+    changeColor.addEventListener('change', function(e) { //change fillcolor
+        var color = changeColor.value;
+//        var print = "Color: (" + color + ")";
+        context.fillStyle = color;
+//        document.getElementById("print").innerHTML = print;
+    });
+    
+    window.addEventListener("orientationchange", function() { //clear and resize canvas when the phone rotates
+        context.clearRect(0, 0, canvas.width, canvas.height);
+    }, false);
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
