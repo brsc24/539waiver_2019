@@ -1,8 +1,7 @@
 # 539waiver_2019
 For 539 waiver
-Name: Si Qiu
 
-Please check comments in the html file for notes. Thank you.
+Name: Si Qiu
 
 ## Tasks
 1. Drawing canvas: 80% height, 80% width of the browser window
@@ -13,3 +12,5 @@ Please check comments in the html file for notes. Thank you.
 6. Keyboard shortcuts to change pen color: B: blue; R: red; Y: yellow; G: green
 7. Keyboard up arrow: pen up; down arrow: pen down
 8. Resize and clear the canvas while rotating the phone
+
+Please check comments in the html file for notes. 
